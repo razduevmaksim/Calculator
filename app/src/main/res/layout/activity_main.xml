@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    android:orientation="vertical"
+    android:padding="10dp"
+    tools:context=".MainActivity"
+    tools:ignore="HardcodedText">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="5dp"
+        android:layout_weight="4">
+
+        <TextView
+            android:id="@+id/textView_calculation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:lines="2"
+            android:maxLength="35"
+            android:maxLines="2"
+            android:text=""
+            android:textAlignment="textEnd"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            app:layout_constraintBottom_toTopOf="@id/textView_result"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView_result"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="50dp"
+            android:lines="1"
+            android:maxLines="1"
+            android:text=""
+            android:textAlignment="textEnd"
+            android:textColor="@color/white"
+            android:textSize="40sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="5"
+        android:orientation="vertical">
+
+        <LinearLayout style="@style/button_row">
+
+            <Button
+                style="@style/button_top_column"
+                android:layout_weight="0.8"
+                android:onClick="clearAll"
+                android:text="AC"
+                tools:ignore="UsingOnClickInXml" />
+
+            <Button
+                style="@style/button_top_column"
+                android:layout_weight="1.2"
+                android:onClick="backspace"
+                android:paddingStart="1dp"
+                android:paddingEnd="5dp"
+                android:text="⌫"
+                tools:ignore="UsingOnClickInXml" />
+
+            <Button
+                style="@style/button_right_column"
+                android:layout_weight="1.2"
+                android:onClick="symbolsOperation"
+                android:text="÷"
+                tools:ignore="UsingOnClickInXml" />
+        </LinearLayout>
+
+        <LinearLayout style="@style/button_row">
+
+            <Button
+                style="@style/button_number"
+                android:text="7" />
+
+            <Button
+                style="@style/button_number"
+                android:text="8" />
+
+            <Button
+                style="@style/button_number"
+                android:text="9" />
+
+            <Button
+                style="@style/button_right_column"
+                android:text="×" />
+        </LinearLayout>
+
+        <LinearLayout style="@style/button_row">
+
+            <Button
+                style="@style/button_number"
+                android:text="4" />
+
+            <Button
+                style="@style/button_number"
+                android:text="5" />
+
+            <Button
+                style="@style/button_number"
+                android:text="6" />
+
+            <Button
+                style="@style/button_right_column"
+                android:text="—" />
+        </LinearLayout>
+
+        <LinearLayout style="@style/button_row">
+
+            <Button
+                style="@style/button_number"
+                android:text="1" />
+
+            <Button
+                style="@style/button_number"
+                android:text="2" />
+
+            <Button
+                style="@style/button_number"
+                android:text="3" />
+
+            <Button
+                style="@style/button_right_column"
+                android:text="+" />
+        </LinearLayout>
+
+        <LinearLayout style="@style/button_row">
+
+            <Button
+                style="@style/button_number"
+                android:layout_weight="0.8"
+                android:onClick="numberOperation"
+                android:text="0"
+                tools:ignore="UsingOnClickInXml" />
+
+            <Button
+                style="@style/button_number"
+                android:layout_weight="1.2"
+                android:text="." />
+
+            <Button
+                style="@style/button_right_column"
+                android:layout_weight="1.2"
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="equals"
+                android:text="="
+                tools:ignore="UsingOnClickInXml" />
+
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
