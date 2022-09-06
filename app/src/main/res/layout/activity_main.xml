@@ -54,14 +54,15 @@
         android:layout_weight="5"
         android:orientation="vertical">
 
-        <LinearLayout style="@style/button_row">
+        <LinearLayout
+            style="@style/button_row"
+            tools:ignore="UsingOnClickInXml">
 
             <Button
                 style="@style/button_top_column"
                 android:layout_weight="0.8"
                 android:onClick="clearAll"
-                android:text="AC"
-                tools:ignore="UsingOnClickInXml" />
+                android:text="AC" />
 
             <Button
                 style="@style/button_top_column"
@@ -69,15 +70,13 @@
                 android:onClick="backspace"
                 android:paddingStart="@dimen/spacing_tiny"
                 android:paddingEnd="@dimen/spacing_normal"
-                android:text="⌫"
-                tools:ignore="UsingOnClickInXml" />
+                android:text="⌫" />
 
             <Button
                 style="@style/button_right_column"
                 android:layout_weight="1.2"
                 android:onClick="symbolsOperation"
-                android:text="÷"
-                tools:ignore="UsingOnClickInXml" />
+                android:text="÷" />
         </LinearLayout>
 
         <LinearLayout style="@style/button_row">
@@ -137,14 +136,15 @@
                 android:text="+" />
         </LinearLayout>
 
-        <LinearLayout style="@style/button_row">
+        <LinearLayout
+            style="@style/button_row"
+            tools:ignore="UsingOnClickInXml">
 
             <Button
                 style="@style/button_number"
                 android:layout_weight="0.8"
                 android:onClick="numberOperation"
-                android:text="0"
-                tools:ignore="UsingOnClickInXml" />
+                android:text="0" />
 
             <Button
                 style="@style/button_number"
@@ -157,8 +157,7 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:onClick="equals"
-                android:text="="
-                tools:ignore="UsingOnClickInXml" />
+                android:text="=" />
 
         </LinearLayout>
     </LinearLayout>

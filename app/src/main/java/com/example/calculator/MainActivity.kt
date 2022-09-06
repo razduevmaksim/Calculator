@@ -11,28 +11,33 @@ import kotlinx.android.synthetic.main.activity_main.*
 const val APP_PREFERENCES = "APP_PREFERENCES"
 const val PREF_CALCULATION = "PREF_CALCULATION"
 const val PREF_RESULT = "PREF_RESULT"
+const val PREF_DECIMAL = "PREF_DECIMAL"
 
 class MainActivity : AppCompatActivity() {
     private lateinit var preferences: SharedPreferences
 
     private var canAddOperation = false
     private var canAddDecimal = false
+    private var canAddDecimalAfterRotate = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        //возможность продолжать использовать операции, если экран перевернулся
-        if (textView_calculation.text.isNotEmpty()) {
-            canAddOperation = true
-        } else if (textView_calculation.text.isEmpty()) {
-            canAddDecimal = false
-        }
-
         //SharedPreferences (чтение данных при запуске приложения)
         preferences = this.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE)
         textView_calculation.text = preferences.getString(PREF_CALCULATION, "")
         textView_result.text = preferences.getString(PREF_RESULT, "")
+        canAddDecimalAfterRotate = preferences.getBoolean(PREF_DECIMAL, false)
+
+        //возможность продолжать использовать операции, если экран перевернулся
+        if (textView_calculation.text.toString().isNotEmpty() || canAddDecimalAfterRotate) {
+            canAddOperation = true
+            canAddDecimal = false
+        } else if (textView_calculation.text.toString().isEmpty()) {
+            canAddOperation = false
+            canAddDecimal = true
+        }
     }
 
     //сохранение данных по ключу
@@ -265,6 +270,11 @@ class MainActivity : AppCompatActivity() {
         editor.putString(PREF_CALCULATION, textViewCalculation)
         val textViewResult = textView_result.text.toString()
         editor.putString(PREF_RESULT, textViewResult)
+
+        if (textView_calculation.text.isNotEmpty()) {
+            canAddDecimalAfterRotate = true
+        }
+        editor.putBoolean(PREF_DECIMAL, canAddDecimalAfterRotate)
         editor.apply()
     }
 }
