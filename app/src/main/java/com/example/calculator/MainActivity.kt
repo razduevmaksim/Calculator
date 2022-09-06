@@ -1,12 +1,20 @@
 package com.example.calculator
 
+import android.content.Context
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import kotlinx.android.synthetic.main.activity_main.*
 
+const val APP_PREFERENCES = "APP_PREFERENCES"
+const val PREF_CALCULATION = "PREF_CALCULATION"
+const val PREF_RESULT = "PREF_RESULT"
+
 class MainActivity : AppCompatActivity() {
+    private lateinit var preferences: SharedPreferences
+
     private var canAddOperation = false
     private var canAddDecimal = true
 
@@ -18,6 +26,11 @@ class MainActivity : AppCompatActivity() {
         if (textView_calculation.text.isNotEmpty()) {
             canAddOperation = true
         }
+
+        //SharedPreferences (чтение данных при запуске приложения)
+        preferences = this.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE)
+        textView_calculation.text = preferences.getString(PREF_CALCULATION, "")
+        textView_result.text = preferences.getString(PREF_RESULT, "")
     }
 
     //сохранение данных по ключу
@@ -213,5 +226,18 @@ class MainActivity : AppCompatActivity() {
         }
 
         return result
+    }
+
+    override fun onStop() {
+        super.onStop()
+
+        //SharedPreferences (запись данных при выходе из приложения)
+        preferences = this.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE)
+        val editor = preferences.edit()
+        val textViewCalculation = textView_calculation.text.toString()
+        editor.putString(PREF_CALCULATION, textViewCalculation)
+        val textViewResult = textView_result.text.toString()
+        editor.putString(PREF_RESULT, textViewResult)
+        editor.apply()
     }
 }
