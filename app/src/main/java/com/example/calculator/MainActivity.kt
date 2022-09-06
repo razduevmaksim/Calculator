@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var preferences: SharedPreferences
 
     private var canAddOperation = false
-    private var canAddDecimal = true
+    private var canAddDecimal = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,6 +25,8 @@ class MainActivity : AppCompatActivity() {
         //возможность продолжать использовать операции, если экран перевернулся
         if (textView_calculation.text.isNotEmpty()) {
             canAddOperation = true
+        } else if (textView_calculation.text.isEmpty()) {
+            canAddDecimal = false
         }
 
         //SharedPreferences (чтение данных при запуске приложения)
@@ -68,7 +70,32 @@ class MainActivity : AppCompatActivity() {
 
         val length = textView_calculation.length()
         if (length > 0) {
+            if (textView_calculation.text.toString().last() == '.') {
+                canAddDecimal = true
+            }
             textView_calculation.text = textView_calculation.text.subSequence(0, length - 1)
+
+            if (textView_calculation.text.toString().substringAfterLast('.').contains("+") ||
+                textView_calculation.text.toString().substringAfterLast('.').contains("-") ||
+                textView_calculation.text.toString().substringAfterLast('.').contains("×") ||
+                textView_calculation.text.toString().substringAfterLast('.').contains("÷")
+            ) {
+                canAddDecimal = true
+            } else if (!textView_calculation.text.toString().substringAfterLast('.')
+                    .contains("+") ||
+                !textView_calculation.text.toString().substringAfterLast('.').contains("-") ||
+                !textView_calculation.text.toString().substringAfterLast('.').contains("×") ||
+                !textView_calculation.text.toString().substringAfterLast('.').contains("÷")
+            ) {
+                canAddDecimal = false
+            }
+
+            if (!textView_calculation.text.toString().contains(".")) {
+                canAddDecimal = true
+            }
+
+        } else if (length == 0) {
+            canAddDecimal = true
         }
 
         //возможность использовать операции
