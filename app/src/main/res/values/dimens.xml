@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- font sizes -->
+    <dimen name="text_large">40sp</dimen>
+    <dimen name="text_normal">35sp</dimen>
+    <dimen name="text_small">30sp</dimen>
+
+    <!-- typical spacing-->
+    <dimen name="spacing_larger">50dp</dimen>
+    <dimen name="spacing_large">10dp</dimen>
+    <dimen name="spacing_normal">5dp</dimen>
+    <dimen name="spacing_tiny">1dp</dimen>
+
+</resources>
