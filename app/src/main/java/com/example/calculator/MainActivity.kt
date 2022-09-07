@@ -34,16 +34,16 @@ class MainActivity : AppCompatActivity() {
         if (textView_calculation.text.toString().isNotEmpty() || canAddDecimalAfterRotate) {
             canAddOperation = true
             canAddDecimal = false
+            if (textView_calculation.text.toString().substringAfterLast('.').contains("+") ||
+                textView_calculation.text.toString().substringAfterLast('.').contains("-") ||
+                textView_calculation.text.toString().substringAfterLast('.').contains("×") ||
+                textView_calculation.text.toString().substringAfterLast('.').contains("÷") ||
+                !textView_calculation.text.toString().contains('.')
+            ) {
+                canAddDecimal = true
+            }
         } else if (textView_calculation.text.toString().isEmpty()) {
             canAddOperation = true
-            canAddDecimal = true
-        }
-
-        if (textView_calculation.text.toString().substringAfterLast('.').contains("+") ||
-            textView_calculation.text.toString().substringAfterLast('.').contains("-") ||
-            textView_calculation.text.toString().substringAfterLast('.').contains("×") ||
-            textView_calculation.text.toString().substringAfterLast('.').contains("÷")
-        ) {
             canAddDecimal = true
         }
     }
@@ -85,10 +85,11 @@ class MainActivity : AppCompatActivity() {
         if (length > 0) {
             if (textView_calculation.text.toString().last() == '.') {
                 canAddDecimal = true
-            }else if (textView_calculation.text.toString().last() == '+'||
-                textView_calculation.text.toString().last() == '-'||
-                textView_calculation.text.toString().last() == '×'||
-                textView_calculation.text.toString().last() == '÷'){
+            } else if (textView_calculation.text.toString().last() == '+' ||
+                textView_calculation.text.toString().last() == '-' ||
+                textView_calculation.text.toString().last() == '×' ||
+                textView_calculation.text.toString().last() == '÷'
+            ) {
                 canAddOperation = true
             }
 
@@ -125,10 +126,10 @@ class MainActivity : AppCompatActivity() {
 
             //добавление операции или замена существующей
             if (view is Button) {
-                if (textView_calculation.text.toString().isEmpty()){
+                if (textView_calculation.text.toString().isEmpty()) {
                     textView_calculation.append("0")
                     textView_calculation.append(view.text)
-                }else {
+                } else {
                     val lastItem =
                         textView_calculation.text.toString()[textView_calculation.text.length - 1]
 
