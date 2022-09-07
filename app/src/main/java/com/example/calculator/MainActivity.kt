@@ -38,6 +38,14 @@ class MainActivity : AppCompatActivity() {
             canAddOperation = false
             canAddDecimal = true
         }
+
+        if (textView_calculation.text.toString().substringAfterLast('.').contains("+") ||
+            textView_calculation.text.toString().substringAfterLast('.').contains("-") ||
+            textView_calculation.text.toString().substringAfterLast('.').contains("×") ||
+            textView_calculation.text.toString().substringAfterLast('.').contains("÷")
+        ) {
+            canAddDecimal = true
+        }
     }
 
     //сохранение данных по ключу
