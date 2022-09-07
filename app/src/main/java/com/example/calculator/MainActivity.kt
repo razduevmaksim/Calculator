@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
             canAddOperation = true
             canAddDecimal = false
         } else if (textView_calculation.text.toString().isEmpty()) {
-            canAddOperation = false
+            canAddOperation = true
             canAddDecimal = true
         }
 
@@ -73,7 +73,7 @@ class MainActivity : AppCompatActivity() {
         textView_calculation.text = ""
         textView_result.text = ""
         //возможность использовать операции
-        canAddOperation = false
+        canAddOperation = true
         canAddDecimal = true
     }
 
@@ -85,7 +85,13 @@ class MainActivity : AppCompatActivity() {
         if (length > 0) {
             if (textView_calculation.text.toString().last() == '.') {
                 canAddDecimal = true
+            }else if (textView_calculation.text.toString().last() == '+'||
+                textView_calculation.text.toString().last() == '-'||
+                textView_calculation.text.toString().last() == '×'||
+                textView_calculation.text.toString().last() == '÷'){
+                canAddOperation = true
             }
+
             textView_calculation.text = textView_calculation.text.subSequence(0, length - 1)
 
             if (textView_calculation.text.toString().substringAfterLast('.').contains("+") ||
@@ -110,9 +116,6 @@ class MainActivity : AppCompatActivity() {
         } else if (length == 0) {
             canAddDecimal = true
         }
-
-        //возможность использовать операции
-        canAddOperation = textView_calculation.text.isNotEmpty()
     }
 
     //использование операций
@@ -120,20 +123,26 @@ class MainActivity : AppCompatActivity() {
         if (canAddOperation) {
             view.isClickable = true
 
-            val lastItem =
-                textView_calculation.text.toString()[textView_calculation.text.length - 1]
-
             //добавление операции или замена существующей
             if (view is Button) {
-                if (lastItem.isDigit() || lastItem == '.') {
+                if (textView_calculation.text.toString().isEmpty()){
+                    textView_calculation.append("0")
                     textView_calculation.append(view.text)
-                } else if (!lastItem.isDigit()) {
-                    val length = textView_calculation.length()
-                    textView_calculation.text = textView_calculation.text.subSequence(0, length - 1)
-                    textView_calculation.append(view.text)
-                }
+                }else {
+                    val lastItem =
+                        textView_calculation.text.toString()[textView_calculation.text.length - 1]
 
-                canAddDecimal = true
+                    if (lastItem.isDigit() || lastItem == '.') {
+                        textView_calculation.append(view.text)
+                    } else if (!lastItem.isDigit()) {
+                        val length = textView_calculation.length()
+                        textView_calculation.text =
+                            textView_calculation.text.subSequence(0, length - 1)
+                        textView_calculation.append(view.text)
+                    }
+
+                    canAddDecimal = true
+                }
             }
         }
     }
