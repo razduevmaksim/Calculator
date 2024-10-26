@@ -1,5 +1,5 @@
 <p align="center">
-      <img src="<img width="240" alt="{9B5F00B8-2A0C-47FF-8649-820C2447D0CA}" src="https://github.com/user-attachments/assets/fb292b7a-f93a-4010-b46b-aea2c505960c">
+      <img src="<img width="240" alt="{9B5F00B8-2A0C-47FF-8649-820C2447D0CA}" src="https://ltdfoto.ru/image/h20yi8">
 </p>
 
 ## About
